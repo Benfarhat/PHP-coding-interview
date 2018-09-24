@@ -9,15 +9,38 @@ PHP is a widely-used open source general-purpose scripting language that is espe
 
 PHP is a recursive acronym which means PHP: Hypertext Preprocessor
 
+## What is the old name of PHP
+
+Personal home page
+
+In 1994 PHP was a simple set of Common Gateway Interface (CGI) binaries writtent in the C programming language by Rasmus Lerdorf. Originally used for tracking visits to his online resume, he named the suite of scripts "Personal Home Page Tools', more frequently referenced as "PHP Tools".
+
+Over Time, more functionality was desired, and Rasmus rewrote PHP Tools, reproducing a much larger and richer implementation. This new model was capable of database interaction and more, providing a framework upon which users could develop simple dynamoc web applications such as guestbooks.
+
+## Explain the difference between static and dynamic websites?
+
+In static websites, content can't be changed after running the script. You can't change anything in the site. Content is fixed (predefined) and each page is coded in plain HTML and CSS.
+
+In dynamic websites, websites can create webpage dynamically after dealing with database and generate the contents dynamically using database queries. It's writtenusing server-side scipting languages such as PHP, ASP, JS, JSP, etc...
+
 ## Which programming language does PHP resemble?
 
 PHP syntax resembles Perl and C.
+
+## What are the popular Content Management System (CMS) using PHP?
+
+- Wordpress
+- Joomla
+- Magento
+- Drupal
 
 ## What does PEAR stand for?
 
 PEAR means "PHP Extension and Application Repository". It extends PHP and provides a higher level of programming for web developers.
 
 It's a repository of PHP software code founded in 1999 by Stig S. Bakken to promote the re-use of code that performs common functions. With Composer, another packages manager and an alternative for PEAR packages, some people of the PHP community argue to replacing PEAR in favor of composer.
+
+It also provides a command line interface (CLI) to install packages automatically.
 
 ## What does PECL stand for?
 
@@ -45,7 +68,9 @@ Just use the PHP CLI program with the option -a as follows:
 
 ```
 php -a
-```To quit, we just have to press CTRL+C, using a simple `exit` or `quit` command.
+```
+
+To quit, we just have to press CTRL+C, using a simple `exit` or `quit` command.
 
 ## What is the correct and the most common way to start and finish a PHP block of code?
 
@@ -84,6 +109,7 @@ print "hello the world";
 <?= "Hello the world" ?>
 ```
 
+
 ```
 echo <<<EOT
 Hello
@@ -92,11 +118,21 @@ world
 EOT;
 ```
 
+## What is the difference between "echo" and "print" in PHP?
+
+Echo and print are two a language construct not a function, so use of parentheses is not required.
+
+otherwise, Echo can output one or more string, but print can only output one string and always return 1.
+
+Echo is faster than print because it does not return any value.
+
 ## What is the main difference between PHP 4 and PHP 5?
 
 PHP 5 presents many additional OOP (Object Oriented Programming) features. In fact, starting with PHP 5, the object model was rewritten to allow for better performance and more features. This was the major cha,ge from PHP 4. PHP 5 has a full object model.
 
 Among the features in PHP 5 are the inclusions of visibility, abstract and final classes and methods, additional magic methods, interfaces, cloning and typehinting.
+
+Regarding the scripting engine, PHP 4 uses Zend Engine 1 while PHP 5 uses Zend Engine 2
 
 ## What about PHP 6?
 
@@ -139,6 +175,38 @@ use Symfony\Component\Console\{
   Question\ConfirmationQuestion,
 };
 ```
+
+## List some of the features of PHP 7
+
+
+- Scalar type declarations
+- Return type declarations
+- Null coalescing operator (??)
+- Spaceship operator
+- Constant arrays using define()
+- Anonymous classes
+- Closure::call method
+- Group use declaration
+- Generator return expressions
+- Generator delegation
+- Space ship operator
+
+## What are the popular frameworks in PHP?
+
+- Symfony
+- Laravel
+- Zend Framework
+- CakePHP
+- CodeIgnite
+- Yii 2
+- etc...
+
+## What is the difference between $message and $$message?
+
+$message stores variable data while $$message is used to store variable of variables.
+
+$message stores fixed data whereas the data stored in $$message may be changed dynamically.
+
 
 
 
