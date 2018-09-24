@@ -585,30 +585,56 @@ Note that gettype() returns the type of a PHP variabble (Boolean, Integer, Doubl
 bool empty ( mixed $var )
 ```
 
+## What does the unlink() function mean?
+
+The unlink() function is dedicated for the file system handling. It simply deletes the file given as entry.
+
+## What does the unset() function mean?
+
+The unset() function is dedicated for variable management. It will make a variable undefined.
+
+In reality, the behavior of unset() inside of a function can vary depending on what type of variable you are attempting to destroy.
+for example, to unset a global variable inside of a function, then use the $GLOBALS array to do so:
+
+```
+
+<?php
+function foo() 
+{
+    unset($GLOBALS['bar']);
+}
+
+$bar = "something";
+foo();
+?>
+
+```
+
+If a variable that is passed by reference is unset() inside of a function, only the local variable is destroyed. The variable in the calling environment will retain the same value as before unset() was called.
+
+```
+
+<?php
+function foo(&$bar) 
+{
+    unset($bar);
+    $bar = "blah";
+}
+
+$bar = 'something';
+echo "$bar\n";
+
+foo($bar);
+echo "$bar\n";
+?>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*
+The above example will output:
+  something
+  something
+*/
+```
 
 
 
