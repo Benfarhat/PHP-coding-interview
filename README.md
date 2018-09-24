@@ -38,7 +38,7 @@ PHP syntax resembles Perl and C.
 
 PEAR means "PHP Extension and Application Repository". It extends PHP and provides a higher level of programming for web developers.
 
-It's a repository of PHP software code founded in 1999 by Stig S. Bakken to promote the re-use of code that performs common functions. With Composer, another packages manager and an alternative for PEAR packages, some people of the PHP community argue to replacing PEAR in favor of composer.
+It's a repository of PHP software code founded in 1999 by Stig S. Bakken to promote the re-use of code that performs common functions. With Composer, another packages manager and an alternative for PEAR packages, some people of the PHP community argue to replacing PEAR in favor of composer (created by Nils dermann).
 
 It also provides a command line interface (CLI) to install packages automatically.
 
@@ -487,21 +487,86 @@ mysqli_close($con);
 
 ```
 
+## How can we access the data sent through the URL with the GET method?
+
+To acces the data sent via the GET method, we use $_GET array (which is a superglobal variable) or $_REQUEST.
+
+in URL like this: www.url.com?var=value
+
+We can access the content of var with $_GET['var']
 
 
+```
+<?php
+
+print "<pre>";
+print_r($_GET);
+
+print_r($_REQUEST);
+
+print($_GET['q']);
+
+/*
+On URL: http://localhost/?q=test&a=75
+Array
+(
+    [q] => test
+    [a] => 75
+)
+Array
+(
+    [q] => test
+    [a] => 75
+)
+test
+*/
+```
+
+## How can we access the data sent through the URL with the POST method?
+
+To access the data sent this way, you use hte $_POST array or the $_REQUEST array
+
+```
+<html>
+<body>
+
+<form action="/" method="post">
+Name: <input type="text" name="name"><br>
+E-mail: <input type="text" name="email"><br>
+<input type="submit">
+</form>
+
+</body>
+</html> 
 
 
+<?php
+    
+print "<pre>";
+print_r($_POST ?? '');
 
+print_r($_REQUEST ?? '');
 
+print($_POST['name']?? '');
+print "<br>";
+print($_POST['email']?? '');
 
-
-
-
-
-
-
-
-
+/*
+if we send name = benfarhat and email to benfarhat.elyes@test.com we receive:
+Array
+(
+    [name] => benfarhat
+    [email] => benfarhat.elyes@test.com
+)
+Array
+(
+    [name] => benfarhat
+    [email] => benfarhat.elyes@test.com
+)
+benfarhat
+benfarhat.elyes@test.com
+*/
+```
 
 
 
