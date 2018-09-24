@@ -207,7 +207,29 @@ $message stores variable data while $$message is used to store variable of varia
 
 $message stores fixed data whereas the data stored in $$message may be changed dynamically.
 
+## Is multiple inheritance supported in PHP?
 
+PHP supports only single inheritance; it means that a class can be extended from only one single class using the keyword "extends"
+
+## What is the meaning of a final class and a final method?
+
+"final" is introduced in PHP5. Final class means that this class cannot be extended and a final method cannot be overriden.
+
+## How is the comparison of objects done in PHP?
+
+We use the operator "==" to test if two objects are instanced from the same class and have same attributes and equal calues. We can test if two objects are referring to the same instance o the same class by the use of the identity operator "===".
+
+## How can PHP and HTML interact?
+
+It is possible to generate HTML through PHP scripts, and it is possible to pass pieces of information from HTML to PHP.
+
+## How can PHP and javascript interact?
+
+We can exchange variables since PHP can generate Javascript code to be executed by the browser and it is possible to pass specific variables back to PHP via the URL.
+
+## What type of operation is needed when passing values through a form or an URL?
+
+If we would like to pass values through a form or an URL, then we nedd to encode and to decode them using `htmlspecialchars()` and `urlencode()`
 
 
 
