@@ -110,7 +110,7 @@ The mose easily recognizible advantage of the new PHPNG engine (using with PHP 7
 
 PHP 7 introduce also the spaceship operator (`($a<=>$b)===-1; // $a < $b`) runs under the official name of Combined Comparison Operator, and the Null Coalescing operator (`$username = $_GET['user'] ?? 'nobody';`). 
 
-PHP 7 add anonymous classes and enhance the quality of code with the help or return type declarations (`function getIterator(): Iterator {/* */ }`) .
+PHP 7 add anonymous classes and enhance the quality of code with the help of return type declarations (`function getIterator(): Iterator {/* */ }`) .
 
 And finally, it facilitates imports from the same namespace
 
