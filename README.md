@@ -95,6 +95,12 @@ Since PHP 7.0.0.0, the ASP tags `<%`, `%>`, `<%=`, and the script tag `<script l
 
 ## How can we display the output directly to the browser?
 
+```
+<?= "Hello" ?>
+```
+
+## How can i display text with a PHP script
+
 To be able to display the output directly to the browser we have to use one of the followings methods:
 
 ```
@@ -104,11 +110,6 @@ echo "hello the world";
 ```
 print "hello the world";
 ```
-
-```
-<?= "Hello the world" ?>
-```
-
 
 ```
 echo <<<EOT
@@ -125,6 +126,18 @@ Echo and print are two a language construct not a function, so use of parenthese
 otherwise, Echo can output one or more string, but print can only output one string and always return 1.
 
 Echo is faster than print because it does not return any value.
+
+## How can we display information of a variable and readable by a human with PHP?
+
+To be able to display a human-readable result we use print_r().
+
+We can also make it more beautiful by adding before a "pre" tag
+
+```
+print '<pre>';
+print_r $variable;
+print '</pre>';
+```
 
 ## What is the main difference between PHP 4 and PHP 5?
 
@@ -265,7 +278,66 @@ The functions are:
 - imagesx() for the width
 - imagesy() for the height
 
+## How failures in execution are handled with include() and require() functions?
 
+If the function require() cannot access the file then it ends with a fatal error (E_COMPILE_ERROR). However, the include() functions gives a warning (E_WARNING), and the PHP script continues to execute.
+
+The include and require statements includes and evaluate the specified file. When a file is included, the code it contains inherits the variable scope of the line on which the include occurs.Any variables available at that line in the calline file will be available within the called file, from that point frward. However, all functions and classes defined in the included file have the global scope.
+
+```
+vars.php
+<?php
+
+$color = 'green';
+$fruit = 'apple';
+
+?>
+
+test.php
+<?php
+
+echo "A $color $fruit"; // A
+
+include 'vars.php';
+
+echo "A $color $fruit"; // A green apple
+
+?>
+```
+if the include occurs inside a function within the calling file, then all of the code contained in the called file will behave as though it had been defined inside that function. So, it follow the variable scope of that function. An exception to this rule are magic constants which are evaluated by the parser before the include occurs
+
+```
+
+<?php
+
+function foo()
+{
+    global $color;
+
+    include 'vars.php';
+
+    echo "A $color $fruit";
+}
+
+/* vars.php is in the scope of foo() so     *
+* $fruit is NOT available outside of this  *
+* scope.  $color is because we declared it *
+* as global.                               */
+
+foo();                    // A green apple
+echo "A $color $fruit";   // A green
+
+?>
+
+```
+
+## What is the main difference between require() and require_once()?
+
+require() and require_once() perform the same task except that the second function checks if the PHP script is already inluded or not before executing it. (if not, require_once() will not include/require it again).
+
+
+
+e##
 
 
 
