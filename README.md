@@ -45,7 +45,7 @@ Just use the PHP CLI program with the option -a as follows:
 
 ```
 php -a
-```
+```To quit, we just have to press CTRL+C, using a simple `exit` or `quit` command.
 
 ## What is the correct and the most common way to start and finish a PHP block of code?
 
