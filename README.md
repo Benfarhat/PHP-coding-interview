@@ -44,3 +44,23 @@ Just use the PHP CLI program with the option -a as follows:
 php -a
 ```
 
+## What is the correct and the most common way to start and finish a PHP block of code?
+
+the two most common ways to start and finish a PHP script are:
+
+```
+<?php
+/* PHP Code */
+?>
+```
+
+
+```
+<?
+/* PHP Code */
+?>
+```
+
+`<?` and `?>` only work if PHP was configured with the `--enable-short-tags` option, or by setting to true the directive `short_open_tag` directive in php.ini (wich is by default already set to true)
+
+Since PHP 7.0.0.0, the ASP tags `<%`, `%>`, `<%=`, and the script tag `<script language="php">` are removed from PHP
