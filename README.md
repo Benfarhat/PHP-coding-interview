@@ -335,9 +335,292 @@ echo "A $color $fruit";   // A green
 
 require() and require_once() perform the same task except that the second function checks if the PHP script is already inluded or not before executing it. (if not, require_once() will not include/require it again).
 
+## How is it possible to set an infinite execution time for PHP script?
+
+The set_time_limit(0) added at the beginning of a sets to inifinite the time of execution to not have the PHP error "maximum execution time exceeded". It is also possible to specify this by setting the max_execution_time directive's value in the php.ini file.
+
+The default limit is 30 seconds.
+
+## What does the PHP error "Parse error in PHP - unexpected T_variable at line x" means?
+
+This is a PHP syntax error expressing that a mistake at the line x stops parsing and executing the program.
+
+##  What should we do to be able to export data into an Excel file?
+
+The most common and used way is to get data into a format supported by Excel. For example, it is possible to write a .csv file, to choose for example comma as a separator between fields and then to open the file with Excel.
+
+```
+<?PHP
+  function cleanData(&$str)
+  {
+    $str = preg_replace("/\t/", "\\t", $str);
+    $str = preg_replace("/\r?\n/", "\\n", $str);
+    if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+  }
+
+  // filename for download
+  $filename = "website_data_" . date('Ymd') . ".xls";
+
+  header("Content-Disposition: attachment; filename=\"$filename\"");
+  header("Content-Type: application/vnd.ms-excel");
+
+  $flag = false;
+  foreach($data as $row) {
+    if(!$flag) {
+      // display field/column names as first row
+      echo implode("\t", array_keys($row)) . "\r\n";
+      $flag = true;
+    }
+    array_walk($row, __NAMESPACE__ . '\cleanData');
+    echo implode("\t", array_values($row)) . "\r\n";
+  }
+  exit;
+?>
+```
+## What is the function file_get_contents() useful for?
+
+file_get_contents() lets reading a file and storing it in a string variable.
+
+## How can we connect to a MySQL database from a PHP script?
+
+To be able to connect to a MySQL database, we must use mysqli_connect() function as follows:
+
+```
+<?php
+$database = mysqli_connect('host','username','password');
+mysqli_select_db($database,'database_name');
+?>
+```
+
+## How can we change a mysqli function from procedural style to object oriented style
+
+a function mysql_part1_part2() becomes $mysqli->part1_part2() or mysqli::part1_part2(), for example:
+
+- mysqli_query changes to $mysqli->query()
+- mysqli_select_db() becomes mysqli::select_db()
+
+## What is the function mysql_pconnect() useful for?
+
+mysql_pconnect() ensure a persistent connection to the database, it means that the connection does not close when the PHP script ends.
+
+This function was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0 
+
+## How be the result set of Mysql handled in PHP?
+
+The result set can be handled using mysqli_fetch_array, mysqli_fetch_assoc, mysqli_fetch_object or mysqli_fetch_row
+
+## How is it possible to know the number of rows returned in the result set?
+
+The function mysqli_num_rows() returns the number or rows in a result set. If the number of rows is greater than PHP_INT_MAX, the number will be returned as a string.
+
+It take as parameter a result set identifier returned by mysqli_query(), mysqli_store_result() or mysqli_use_result()
+
+```
+<?php
+$mysqli = new mysqli("localhost", "my_user", "my_password", "world");
+
+/* check connection */
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
+
+if ($result = $mysqli->query("SELECT Code, Name FROM Country ORDER BY Name")) {
+
+    /* determine number of rows result set */
+    $row_cnt = $result->num_rows;
+
+    printf("Result set has %d rows.\n", $row_cnt);
+
+    /* close result set */
+    $result->close();
+}
+
+/* close connection */
+$mysqli->close();
+?>
+
+```
+
+## Which function gives us the number of affected entries by a query?
+
+mysqli_affected_rows() return the number of entries affected by an SQL entry.
+
+## What is the difference between mysqli_fetch_object() and mysqli_fetch_array()? 
+
+The mysqli_fetch_object() function return the current row of a result set as an object while mysqli_fetch_array return the current row of a result set as an associative, a numeric array, or both (available options are the constants MYSQLI_ASSOC, MYSQLI_NUM, or MYSQLI_BOTH).  
+
+```
+<?php
+$con=mysqli_connect("localhost","my_user","my_password","my_db");
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+
+$sql="SELECT Lastname,Age FROM Persons ORDER BY Lastname";
+
+if ($result=mysqli_query($con,$sql))
+  {
+  while ($obj=mysqli_fetch_object($result))
+    {
+    printf("%s (%s)\n",$obj->Lastname,$obj->Age);
+    }
+  // Free result set
+  mysqli_free_result($result);
+}
+  
+  
+if ($result=mysqli_query($con,$sql))
+  {
+  while ($row=mysqli_fetch_array($result,MYSQLI_ASSOC))
+    {
+    printf("%s (%s)\n",$row["Lastname"],$row["Age"]);
+    }
+  // Free result set
+  mysqli_free_result($result);
+}
+
+mysqli_close($con);
+?> 
+
+```
 
 
-e##
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
