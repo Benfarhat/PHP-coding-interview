@@ -231,7 +231,39 @@ We can exchange variables since PHP can generate Javascript code to be executed 
 
 If we would like to pass values through a form or an URL, then we nedd to encode and to decode them using `htmlspecialchars()` and `urlencode()`
 
+## What is needed to be able to use image function?
 
+GD Library is needed to execute images functions.
+
+GD and PHP may also require other libraries (in Windows, you'll include the GD2 DLL `php_gd2.dll` as an extension in `php.ini`), depending on which image formats you want to work with (GD library requires libpng and libjpeg to compile).
+
+GD originally stood for "GIF Draw". However since the revoking of the Unisys license (which owned the gif compression algorithm LZM), it has informally stood for "Graphic Draw"
+
+## What's the use of the function imagetypes()?
+
+imagetypes() returns the image format and types supported by the current version of GD-PGP. The returned values is a bit-field corresponding to the image formats supported by the version of GD linked into PHP. The following bits are returned: IMG_BMP | IMG_GIF | IMG_JPG | IMG_PNG | IMG_WBMP | IMG_XPM | IMG_WEBP.
+
+```
+
+<?php
+if (imagetypes() & IMG_PNG) {
+    echo "PNG Support is enabled";
+}
+?>
+
+```
+
+## What's the use of the function gd_info()?
+
+this function gets information about the version and capabilities of the installed GD library.
+
+## What are the functions to be used to get the image's properties (size, width and height)?
+
+The functions are:
+
+- getimagesize() for the size
+- imagesx() for the width
+- imagesy() for the height
 
 
 
