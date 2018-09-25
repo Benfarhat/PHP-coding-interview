@@ -829,6 +829,23 @@ bar($a);
 echo $a; // 6
 ```
 
+In the first of these, PHP references allow you to make two variables refer to the same content. 
+
+```
+<?php
+$b = 5;
+
+$a =& $b;
+
+$a = 6;
+
+echo $a . "|" . $b; // 6|6
+
+$a = 14;
+
+echo $a . "|" . $b; // 14|14
+```
+
 ## Will a comparison of an integer 12 and a string "13" work in PHP?
 
 Yes, in a loose comparison, PHP converts the value of a variable to the most appropriate type for the action being carried out. With no type casting, we call this `type juggling` (the comparison comes after).
@@ -880,9 +897,156 @@ Since PHP 5.3, it is possible to leave out the middle part of the ternary operat
 
 Expression expr1?:expr2 returns expr1 if expr1 evaluates to TRUE ans expr3 otherwise.
 
+## What is the function func_num_args() used for?
 
+The function func_num_args() is used to give the numner of parameters passed into a function.
 
+## If the variable $var1 is set to 10 and the $var2 is set to the character var1, what's the value of $$var2?
 
+$$var2 contains the value 10.
+
+## What does accessing a class via :: means?
+
+`::` is used to access static methods that do not require object initialization.
+
+## In PHP, objects are they passed by value or by reference?
+
+In PHP, by default obects are passed as [reference](http://www.php.net/manual/en/migration5.oop.php).
+
+If you want to assign by value instead, you should clone your object.
+
+```
+<?php
+
+class X {
+    var $abc = 10; 
+}
+  
+class Y {
+    var $abc = 20; 
+    function changeValue($obj)
+    {
+        $obj->abc = 30;
+    }
+}
+
+function changeValue($obj)
+{
+    $obj->abc = 50;
+}
+
+$x = new X();
+$y = new Y();
+
+echo $x->abc; // 10
+$y->changeValue($x);
+echo $x->abc; // 30
+changeValue($x);
+echo $x->abc; // 50
+```
+
+## Are parent constructor have to be called implicitly inside a class constructor?
+
+No, a parent constructor have to be called explicitly as follows:
+
+```
+<?php
+class X 
+{
+    public function __construct(){
+        echo "Construction called from " . __CLASS__;
+    }
+}
+class Y extends X
+{
+
+}
+  
+class W extends X
+{
+    public function __construct(){
+        
+    }
+}
+
+class Z extends X
+{
+    public function __construct(){
+        parent::__construct();
+    }
+}
+
+$obj1 = new Y(); // Construction called from X
+$obj2 = new W();
+$obj3 = new Z(); // Construction called from X
+```
+
+## What's the difference between __sleep() and __wakeup()?
+
+__sleep() is called on object serialization before storing the content, while __wakeup is called on unserialization when backup the object from a serialized version, __wakeup() permits to define some specific task on object reconstruction.
+
+```
+<?php
+class X 
+{
+    public $a = 10;
+    public $b = 20;
+    protected $c = "hello";
+    public $d = "world";
+
+    public function __sleep(){
+        $this->message('sleep');
+        return ['a', 'd'];
+    }
+    public function __wakeup(){
+        $this->message('wakeup');
+    }
+    public function message($method){
+        echo $method .  " called!<br>";
+    }
+}
+$obj = new X();
+print "<pre>";
+print_r($obj);
+print "</pre>";
+/*
+X Object
+(
+    [a] => 10
+    [b] => 20
+    [c:protected] => hello
+    [d] => world
+)
+*/
+$ser = serialize($obj); // sleep called!
+print_r($ser); // O:1:"X":2:{s:1:"a";i:10;s:1:"d";s:5:"world";}
+$obj->a = 100;
+$obj->b = 200;
+print "<pre>";
+print_r($obj);
+print "</pre>";
+/*
+X Object
+(
+    [a] => 100
+    [b] => 200
+    [c:protected] => hello
+    [d] => world
+)
+*/
+$obj = unserialize($ser); // wakeup called!
+print "<pre>";
+print_r($obj);
+/*
+X Object
+(
+    [a] => 10
+    [b] => 20
+    [c:protected] => hello
+    [d] => world
+)
+*/
+```
 
 
 
