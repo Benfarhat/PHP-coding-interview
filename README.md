@@ -636,54 +636,62 @@ The above example will output:
 */
 ```
 
+## How do I escape data before storing it in database?
 
+The addslashes function enables us to escape data before storage into the database.
 
+It returns a string with backslashes before characters that need to be escaped. The characters are:
 
+- single quote (')
+- double quote (")
+- backslashe (\\)
+- NUL (the NUL byte)
 
+Note that addslashes() is sometimes incorrectly used to try to prevent SQL Injection (A technique where an attacker creates or alters SQL commands to expose hidden data, or to override valuable ones, or even to execute dangerous system level commands on the database host). Instead, database-specific escaping functions and/or prepared statements should be used.
 
+## How is it possible to remove escape characters from a string?
 
+The stripslashes() function enables us to remove the escape characters (backslashes).
 
+\' becomes ', \\ becomes \ and so on.
 
+## How can we automatically escape incoming data?
 
+We have to enable the Magic quotes entry in the configuration file of PHP. 
 
+We use directives magic_quotes_gpc (GPC for Get/Post/Cookie) and magic_quotes_runtime
 
+These features have been deprecated as of PHP 5.3.0 and removed as of PHP 5.4.0
 
+## What does the function get_magic_quotes_gpc() means?
 
+The get_magic_quotes_gpc() function returns the current configuration setting of magic_quotes_gpc.
 
+Since PHP 5.4.0, it always returns FALSE, because the magic quotes feature was removed from PHP.
 
+## Is it possible to remove the HTML tags from data?
 
+The strip_tags() function enables us to clean a string from the HTML tags 
 
+## How can we convert characters which have special significance in HTML? 
 
+The htmlspecialchars() function convert special characters to HTML entities.
 
+- & becomes &amp;
+- " becomes $quot;
+- ' becomes $apos;
+- < becomes $lt
+- > becomes $gt;
 
+The behavior of htmlspecialchars() can be changed by setting a flags bitmask, the second function's parameter (ENT_COMPAT, ENT_QUOTES, ENT_NOQUOTES, ...)
 
+```
+<?php
+$new = htmlspecialchars("<a href='test'>Test</a>", ENT_QUOTES);
+echo $new; // &lt;a href=&#039;test&#039;&gt;Test&lt;/a&gt;
+?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
 
 
 
