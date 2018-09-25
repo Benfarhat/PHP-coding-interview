@@ -134,10 +134,14 @@ To be able to display a human-readable result we use print_r().
 We can also make it more beautiful by adding before a "pre" tag
 
 ```
-print '<pre>';
+print '<pre>' . PHP_EOL;
 print_r $variable;
 print '</pre>';
 ```
+
+## What is PHP_EOL? 
+
+It's a PHP predefined constants, available since PHP 5.0.2, which represents the correct "End Of Line" symbol. 
 
 ## What is the main difference between PHP 4 and PHP 5?
 
@@ -771,13 +775,13 @@ Values are returned by using the optional return statement. Any type may be retu
 
 If the return is omitted, the value NULL will be returned.
 
+## What is the most convenient hashing method to be used to hash passwords?
 
+It is preferable to use crypt() which natively supports several hashing algorithms (one-way string hashing) or its wrapper password_hash() which uses a strong hash, generates a strong salt and applies proper rounds automatically or the function hash() which supports more variants than crypt() (sha384, sha512, ripemdXXX, whirlpool, tigerXXX, snefru, gost, adler32, crcX, havalXXX, ...) rather than using the common hashing algorithms such as MD5, SHA1 or SHA256 because they are conceived to be fast. Hence, hashing passwords with these algorithms can create vulnerability.
 
+## Which cryptographic extension provide generation and verification of digital signature?
 
-
-
-
-
+The PHP-OpenSSL extension provides several cryptographic operations including generation and verification of digital signatures.
 
 
 
