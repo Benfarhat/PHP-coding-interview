@@ -1048,7 +1048,65 @@ X Object
 */
 ```
 
+## What is faster String interpolation or String concatenation
 
+```
+$variable1 = 'Hello ';
+$variable2 = 'world';
+
+$variable3 = $variable1.$variable2;
+$variable4 = "$variable1$variable2";
+
+```
+Article and blog says that the concatenation is faster (nothinf official from php.net), but the following code disapprove this and show that interpolation is faster (curious but scientifically proven!)
+
+For this case:
+```
+<?php
+$concatenation =  "<?php \$variable1 = 'Hello '; \$variable2 = 'World'; \$variable3 = \$variable1\$variable2;";
+$interpolation =  '<?php $variable1 = "Hello "; $variable2 = "World"; $variable3 = "$variable2$variable1";';
+
+
+$startTime = microtime(true);
+token_get_all($concatenation);
+$endTime = microtime(true);
+
+echo 'Concatenation: ', $endTime - $startTime, ' seconds', "<br>";
+// Concatenation: 8.8214874267578E-6 seconds
+
+$startTime = microtime(true);
+token_get_all($interpolation);
+$endTime = microtime(true);
+
+echo 'Interpolation: ', $endTime - $startTime, ' seconds', "<hr>";
+// Interpolation: 4.0531158447266E-6 seconds
+```
+
+With big operation:
+
+```
+<?php
+const NUM = 100000;
+$variable1 = 'Hello ';
+$variable2 = 'World';
+$first =  "<?php \$variable3 = \$variable1." . str_repeat('$variable2.$variable1.', NUM) . "\$variable2;";
+$second =  '<?php $variable3 = "' . str_repeat('$variable2$variable1', NUM + 1 ) . '";';
+
+
+$startTime = microtime(true);
+token_get_all($first);
+$endTime = microtime(true);
+
+echo 'First case: ', $endTime - $startTime, ' seconds', "<br>";
+// First case: 0.068174839019775 seconds
+
+$startTime = microtime(true);
+token_get_all($second);
+$endTime = microtime(true);
+
+echo 'Second case: ', $endTime - $startTime, ' seconds', "<hr>";
+// Second case: 0.053776025772095 seconds
+```
 
 
 
