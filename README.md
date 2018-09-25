@@ -703,7 +703,7 @@ The scope of a variable is the context within which it is defined. For the most 
 
 ## what is the static variable in function useful for? 
 
-A static variable exists only in a local function scope, but it does not lose its values chenprogram execution leaves this scope.
+A static variable exists only in a local function scope, but it does not loose its values when program execution leaves this scope.
 
 ```
 <?php
@@ -728,7 +728,7 @@ echo $testStatic;
 
 ## How can we define a variable accessible in functions of a PHP script?
 
-By declaring a variable global with the keyword "global". A global variable within a function will be accessible fril the global scope.
+By declaring a variable global with the keyword `global`. A global variable within a function will be accessible in the global scope.
 
 ```
 <?php
@@ -750,7 +750,7 @@ echo $testGlobal;
 // 4
 ```
 
-A second way to access variables from the global scope is to use the special PHP-defined $GLOBALS array.
+A second way to access variables from the global scope is to use the special PHP-defined `$GLOBALS` array.
 
 ```
 <?php
@@ -771,27 +771,114 @@ echo $b; // 3
 
 ## How is it possible to return a value from a function?
 
-Values are returned by using the optional return statement. Any type may be returned, including arrays and objects. This causes function to end its execution immediately and pass control back to the line from which it was called.
+Values are returned by using the optional `return` statement. Any type may be returned, including arrays and objects. This causes function to end its execution immediately and pass control back to the line from which it was called.
 
 If the return is omitted, the value NULL will be returned.
 
 ## What is the most convenient hashing method to be used to hash passwords?
 
-It is preferable to use crypt() which natively supports several hashing algorithms (one-way string hashing) or its wrapper password_hash() which uses a strong hash, generates a strong salt and applies proper rounds automatically or the function hash() which supports more variants than crypt() (sha384, sha512, ripemdXXX, whirlpool, tigerXXX, snefru, gost, adler32, crcX, havalXXX, ...) rather than using the common hashing algorithms such as MD5, SHA1 or SHA256 because they are conceived to be fast. Hence, hashing passwords with these algorithms can create vulnerability.
+It is preferable to use `crypt()` which natively supports several hashing algorithms (one-way string hashing) or its wrapper `password_hash()` which uses a strong hash, generates a strong salt and applies proper rounds automatically or the function `hash()` which supports more variants than crypt() (sha384, sha512, ripemdXXX, whirlpool, tigerXXX, snefru, gost, adler32, crcX, havalXXX, ...) rather than using the common hashing algorithms such as MD5, SHA1 or SHA256 because they are conceived to be fast. Hence, hashing passwords with these algorithms can create vulnerability.
 
 ## Which cryptographic extension provide generation and verification of digital signature?
 
 The PHP-OpenSSL extension provides several cryptographic operations including generation and verification of digital signatures.
 
+## How is a constant defined in a PHP script?
+
+The `define()` directive lets us defining a constant as follows:
+
+```
+define("MYCONSTANT",123);
+```
+if the third parameter "case_insensitive" is set to TRUE, the constant will be cas-insensitive. By default this calue is set to FALSE which mean that CONSTANT and Constant represent different values.
+
+Remember that constants differ from normal variables in that you don't use the "$" symbol to declare or use them
+
+Note that since PHP 7.0.0 array values are allowed.
+
+Like superglobals, the scope of a constant is global. You can access constants anywhere in your script without regard to scope.
+
+The value of a constant can be returned with the constant() function which return NULL if the desired constant doe not exist (An E_WARNING level error is generated if the constant is not defined).
+The defined() function checks whether a given named constant exists. 
+
+In a class, we use the keyword `const` to define a constant.
+
+## How can you pass a variable by reference?
+
+To be able to pass a variable by reference, we use anampersand `&` in front of it:
+
+```
+<?php
+function foo(&$var)
+{
+    $var++;
+}
+
+function bar($var) // Note the missing &
+{
+    $var++;
+}
+
+$a=5;
+echo $a; // 5
+
+foo($a);
+echo $a; // 6
+
+bar($a);
+echo $a; // 6
+```
+
+## Will a comparison of an integer 12 and a string "13" work in PHP?
+
+Yes, in a loose comparison, PHP converts the value of a variable to the most appropriate type for the action being carried out. With no type casting, we call this `type juggling` (the comparison comes after).
+
+```
+<?php
+echo 12<=>"13"; // -1
+echo 13<=>"13"; // 0
+echo 14<=>"13"; // 1
+```
+
+## How is it possible to cast types in PHP?
 
 
+The name of the desired type is written in parentheses before which is to be cast?
 
+The casts allowed are:
 
+- (int), (integer) - cast to integer
+- (bool), (boolean) - cast to boolean
+- (float), (double), (real) - cast to float
+- (string) - cast to string
+- (array) - cast to array
+- (object) - cast to object
+- (unset) - cast to NULL 
 
+The (unset) cast has been deprecated as of PHP 7.2.0 and will be removed as of PHP 8.0.0
 
+## When is a conditional statement ended with endif?
 
+When the original if was followed by `:` and then the code block (with or without braces).
 
+## How is the ternary conditional operator used in PHP?
 
+The ternary operator `?:` is composed of three expression:
+
+- a condition
+- two operands describing 
+    - what instruction should be performed when the specified condition is true
+    - what instruction should be performed when the specified condition is false
+
+```
+(expr1)?(expr2):(expr3)
+```
+
+The expression (expr1)?(expr2):(expr3) evaluates to expr2 if expr1 evaluates to TRUE, and expr3 if expr1 evaluates to FALSE.
+
+Since PHP 5.3, it is possible to leave out the middle part of the ternary operator. 
+
+Expression expr1?:expr2 returns expr1 if expr1 evaluates to TRUE ans expr3 otherwise.
 
 
 
