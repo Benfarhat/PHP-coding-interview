@@ -693,33 +693,83 @@ echo $new; // &lt;a href=&#039;test&#039;&gt;Test&lt;/a&gt;
 
 ```
 
+## What is a variable scope?
 
+The scope of a variable is the context within which it is defined. For the most part all PHP variables only have a single scope.
 
+## what is the static variable in function useful for? 
 
+A static variable exists only in a local function scope, but it does not lose its values chenprogram execution leaves this scope.
 
+```
+<?php
 
+function test(){
+    static $testStatic = 1;
+    $testNoStatic = 1;
+    echo $testStatic . " - " . $testNoStatic . "<br>";
+    $testStatic++;
+    $testNoStatic++;
+}
 
+test();
+// 1 - 1
+test();
+// 2 - 1
+test();
+// 3 - 1
+echo $testStatic;
+// Notice: Undefined variable: testStatic
+```
 
+## How can we define a variable accessible in functions of a PHP script?
 
+By declaring a variable global with the keyword "global". A global variable within a function will be accessible fril the global scope.
 
+```
+<?php
 
+function test(){
+    global $testGlobal;
+    $testGlobal = 3;
+    $testNoGlobal = 3;
+    echo $testGlobal . " - " . $testNoGlobal . "<br>";
+    $testGlobal++;
+    $testNoGlobal++;
+}
 
+test();
+// 3 - 3
+test();
+// 3 - 3
+echo $testGlobal;
+// 4
+```
 
+A second way to access variables from the global scope is to use the special PHP-defined $GLOBALS array.
 
+```
+<?php
+$a = 1;
+$b = 2;
 
+function Sum()
+{
+    echo $b; // Notice: Undefined variable: b
+    $GLOBALS['b'] = $GLOBALS['a'] + $GLOBALS['b'];
+    echo $b; // Notice: Undefined variable: b
+} 
 
+Sum();
+echo $b; // 3
+?>
+```
 
+## How is it possible to return a value from a function?
 
+Values are returned by using the optional return statement. Any type may be returned, including arrays and objects. This causes function to end its execution immediately and pass control back to the line from which it was called.
 
-
-
-
-
-
-
-
-
-
+If the return is omitted, the value NULL will be returned.
 
 
 
