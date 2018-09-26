@@ -1182,5 +1182,11 @@ $FILES['userfile']['error'] contains the error code (from 0 to 8) associated wit
 
 We can change the maximum size of files to be uploaded by changing the directive `upload_max_filesize` in php.ini
 
+## What does $_ENV mean?
 
+$_ENV is an associative array of variables sent to the current PHP script via the environment method.
+
+## What does $_COOKIE mean?
+
+$_COOKIE is an associative array of variables sent to the current PHP script using the HTTP Cookies.
 
