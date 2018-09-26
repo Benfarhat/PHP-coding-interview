@@ -1124,8 +1124,29 @@ Since PHP 7.1.0 if session_start() returns FALSE, $_SESSION is no longer initial
 
 You can propagate a session id via cookies (a small file with the maximum size of 4 KB that the web server stores on the client computer) or URL parameters (if the client browser does not support cookies). A session ID (PHPSESSID) is stored on the computer to be returned with every request to the server. 
 
+## What is the meaning of a Persistent Cookie?
 
+A persistent cookie is permanently stored in a cookie file on the browser's computer (Client-Side). By default, cookie are temporary and are erased if we close the browser.
 
+## When do sessions end?
+
+Sessions automatically end when the PHP script finishes executing but can be manually ended using the session_write_close().
+
+session_write_close() function, writes session data and end session.
+Session data is usually stored after your script terminated without the need to call session_write_close(), but as session data is locked to prevent concurrent writes only one script may operate on a session at any time. When using framesets together with sessions you will experience the frames loading one by one due to this locking. You can reduce the time needed to load all the frames by ending the session as soon as all changes to session variables are done.
+
+## What is the difference between session_unregister() and session_unset()?
+
+The session_unregister() function unregister a global variable from the current session and the session_unset() function frees all session variables.
+
+Note that session_unregister has been deprecated as of PHP 5.3.0 and removed as of PHP 5.4.0
+
+We can replicate ths behavior with the unset() function:
+
+```
+unset($_SESSION['varname']);
+unset($varname);
+```
 
 
 
