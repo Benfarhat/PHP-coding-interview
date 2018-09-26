@@ -1108,9 +1108,21 @@ echo 'Second case: ', $endTime - $startTime, ' seconds', "<hr>";
 // Second case: 0.053776025772095 seconds
 ```
 
+## What is the definition of a session?
 
+A session is a logical object enabling us to preserve temporary data across multiple PHP pages. Unlike a cookie, the information is not stored on the users computer.
 
+## How to initiate a session in PHP?
 
+The use of the function session_start() lets us activating a session. it returns TRUE if a session was successfully started, otherwise FALSE.
+
+when session_start() is called or when a session auto starts, PHP will call the open session and read session save handlers. The read callback will retrieve any existing session data (stored in a special serialized format) and will be unzerialized  and used automatically to populate the $_SESSION superglobal when the read callback returns the saved session data back to PHP session handling.
+
+Since PHP 7.1.0 if session_start() returns FALSE, $_SESSION is no longer initializes.
+
+## How can you propagate a session id?
+
+You can propagate a session id via cookies (a small file with the maximum size of 4 KB that the web server stores on the client computer) or URL parameters (if the client browser does not support cookies). A session ID (PHPSESSID) is stored on the computer to be returned with every request to the server. 
 
 
 
