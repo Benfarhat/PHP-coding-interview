@@ -911,7 +911,7 @@ $$var2 contains the value 10.
 
 ## In PHP, objects are they passed by value or by reference?
 
-In PHP, by default obects are passed as [reference](http://www.php.net/manual/en/migration5.oop.php).
+In PHP, by default objects are passed as [reference](http://www.php.net/manual/en/migration5.oop.php).
 
 If you want to assign by value instead, you should clone your object.
 
@@ -1114,7 +1114,7 @@ A session is a logical object enabling us to preserve temporary data across mult
 
 ## How to initiate a session in PHP?
 
-The use of the function session_start() lets us activating a session. it returns TRUE if a session was successfully started, otherwise FALSE.
+The use of the function `session_start()` lets us activating a session. it returns TRUE if a session was successfully started, otherwise FALSE.
 
 when session_start() is called or when a session auto starts, PHP will call the open session and read session save handlers. The read callback will retrieve any existing session data (stored in a special serialized format) and will be unzerialized  and used automatically to populate the $_SESSION superglobal when the read callback returns the saved session data back to PHP session handling.
 
@@ -1130,7 +1130,7 @@ A persistent cookie is permanently stored in a cookie file on the browser's comp
 
 ## When do sessions end?
 
-Sessions automatically end when the PHP script finishes executing but can be manually ended using the session_write_close().
+Sessions automatically end when the PHP script finishes executing but can be manually ended using the `session_write_close()`.
 
 session_write_close() function, writes session data and end session.
 Session data is usually stored after your script terminated without the need to call session_write_close(), but as session data is locked to prevent concurrent writes only one script may operate on a session at any time. When using framesets together with sessions you will experience the frames loading one by one due to this locking. You can reduce the time needed to load all the frames by ending the session as soon as all changes to session variables are done.
@@ -1160,113 +1160,27 @@ $_SERVER is an array including information created by the web server such as pat
 
 $_FILES is a superglobal variable and an associative array composed of items uploaded to the current script via the HTTP POST method.
 
-## What is the difference between $_FILE['userfile']['name'] and $_FILE['userfile']['tmp_name']?
+## What is the difference between $_FILES['userfile']['name'] and $_FILES['userfile']['tmp_name']?
 
-- $_FILE['userfile']['name'] contains the origian name of the file on the client machine.
-- $_FILE['userfile']['tmp_name'] contains the temporary filename of the file in which the uploaded file was stored on the server.
+- $_FILES['userfile']['name'] contains the origian name of the file on the client machine.
+- $_FILES['userfile']['tmp_name'] contains the temporary filename of the file in which the uploaded file was stored on the server.
 
+## How can we get the error when there is a problem to upload a file?
 
+$FILES['userfile']['error'] contains the error code (from 0 to 8) associated with this file upload.
 
+- 0 UPLOAD_ERR_OK : There is no error, the file uploaded with success
+- 1 UPLOAD_ERR_INI_SIZE : The uploaded file exceeds the upload_max_filesoze directive in php.ini
+- 2 UPLOAD_ERR_FORM_SIZE : The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form
+- 3 UPLOAD_ERR_PARTIAL : The uploaded file was only partially uploaded
+- 4 UPLOAD_ERR_NO_FILE : No file was uploaded
+- 6 UPLOAD_ERR_NO_TMP_DIR: No temporary folder
+- 7 UPLOAD_ERR_CANT_WRITE: Failed to write file to the disk
+- 8 UPLOAD_ERR_EXTENSION: A PHP Extension stopped the file upload.
 
+## How can we change the maximum size of the files to be uploaded?
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+We can change the maximum size of files to be uploaded by changing the directive `upload_max_filesize` in php.ini
 
 
 
