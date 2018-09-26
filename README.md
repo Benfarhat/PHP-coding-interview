@@ -699,7 +699,7 @@ echo $new; // &lt;a href=&#039;test&#039;&gt;Test&lt;/a&gt;
 
 ## What is a variable scope?
 
-The scope of a variable is the context within which it is defined. For the most part all PHP variables only have a single scope.
+The scope of a variable is the context within which it is defined. For the most part all PHP variables only have a single scope. This single scope spans included and required files as well.
 
 ## what is the static variable in function useful for? 
 
