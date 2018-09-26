@@ -1148,8 +1148,22 @@ unset($_SESSION['varname']);
 unset($varname);
 ```
 
+## What does $GLOBALS mean?
 
+$GLOBALS is associative array including references to all variables which are currently defined in the global scope of the script.
 
+## What does $_SERVER mean?
+
+$_SERVER is an array including information created by the web server such as paths, headers and script locations.
+
+## What does $_FILES means?
+
+$_FILES is a superglobal variable and an associative array composed of items uploaded to the current script via the HTTP POST method.
+
+## What is the difference between $_FILE['userfile']['name'] and $_FILE['userfile']['tmp_name']?
+
+- $_FILE['userfile']['name'] contains the origian name of the file on the client machine.
+- $_FILE['userfile']['tmp_name'] contains the temporary filename of the file in which the uploaded file was stored on the server.
 
 
 
