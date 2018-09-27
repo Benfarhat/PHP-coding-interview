@@ -1257,3 +1257,81 @@ print is_a($variable, C::class, FALSE); // FALSE
 
 The goto statement can be used to jump to another section in the program. The target point is specified by a label followed by a colon, and the instruction is given as goto followed by the desired target label. This is not a full unrestricted goto, the target must be within the same file and context, meaning that you cannot jump out of a function or method, nor can you jump int one. You also cannot jump int any sort of loop or switch structure.
 
+## What is the difference between Exception::getMessage and Exception::getLine?
+
+Exception::getMessage lets us getting the Exception message and Exception::getLine lets us getting the line in which the exception occured.
+
+## What does the expression Exception::__toSring means?
+
+Exception::__string gives the String representation of the exception.
+
+## How is it possible to parse a configuration file?
+
+The function parse_ini_file() enables us to load in the ini file specified in the first parameter. It returns the setting in it in an associative array on success and FALSE on failure.
+
+## What is the difference between the functions strstr() and stristr()?
+
+strstr() find the first occurence of a string and return the portion of string, or FALSE on failure.
+stristr() is the case-insensitive version of strstr().
+
+## What is the difference between "for" and "foreach"?
+
+for statement execute a block of code a specified number of time, it is generally used when you know in advance how many times the block should run. 
+
+foreach is an easy way to iterate over arrays or objects. With objects, foreach used as elements only public variables.
+
+```
+<?php
+$arr = ['a'=>1,'b'=>3,'c'=>5];
+$obj = new class
+{
+    public $a = 1;
+    private $b = 3;
+    public $c = 5;
+};
+
+foreach($arr as $k => $v)
+    echo "$k: $v ";
+// a: 1 b: 3 c: 5
+
+foreach($obj as $k => $v)
+    echo "$k: $v ";
+// a: 1 c: 5 
+```
+
+## Is it possible to submit a form without submit button?
+
+**NOTE**: Don't know what is the relation between this question and PHP
+
+It is possible to do this by calling the method document.form.submit()
+
+## What is the difference between ereg_replace() and eregi_replace()?
+
+These functions was deprecated in PHP 5.3.0, and removed in PHP 7.0.0 they are alternatively replaced by preg_replace(). Otherwise, ereg_replace() is a function used for text replacement after scanning for matches to a regular expression (pattern) eregi_replace is the case insensitive version of ereg_replace
+
+```
+<?php /* Don't try this code on PHP 7.x */
+$string = "What's In Your Head?";
+echo ereg_replace("i", "*i*", $string); // What's In Your Head?
+echo eregi_replace("i", "*i*", $string); // What's *i*n Your Head?
+```
+
+## Is it possible to protect special characters in an URL query string?
+
+Yes, we use the urlencode() function to be able to protect special characters. it returns a string in which all non-alphanumeric characters except `-`, `_`, `.`, have been replaced with a percent (%) sign followed by two hex digits and spaces encoded as plus (+) signs.
+
+```
+<?php
+echo urlencode("What's In Your Head?"); // What%27s+In+Your+Head%3F
+```
+
+## What are the four classes of errors that can occur in PHP?
+
+- Syntax errors : it occurs when a programmer uses wrong syntax in a php script. When this error occurs the php script is not executed
+- Notice errors : it occurs when we attemps to obtain an information of an undefined variable, these errors doesn't affect the execution of a php script
+- warning errors : it occurs when we try to include a file that doesn't exist. It doesn't affect the execution of your php script
+- Fatal errors : it occurs when a script call a function which is not previously defined, a php script will not executed when these type of errors occurs.
+
+## What is the difference between characters \034 and \x34?
+
+`\xhh` is the character with hexadecimal code `hh`, and `\ddd` is a character with octal code `ddd`
