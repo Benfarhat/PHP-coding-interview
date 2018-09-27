@@ -1222,6 +1222,38 @@ It's a strict comparison operator wich mean "identical" (and not only equal). It
 - != means inequality, it is a poor comparison which simply mean that $a is not equal to $b (after type juggling)
 - !== mean non-identity, it a strict comparison which mean that $a is not equal to $a or have not the same type than $b. For example
 
-1 != "1" // Are they different after type juggling ??? return FALSE
+1 != "1" // Are they different after type juggling ? return FALSE
 
-1 !== "1" // Are their value or type different ??? return TRUE
+1 !== "1" // Are their value or type different ? return TRUE
+
+## How can we determine whether a PHP variable is an instantiated object of a certain class?
+
+- instanceof is an operator used to determined whether a PHP variable is an instantiated object of a certain class.
+- get_class() is a function which returns the name of the class of an object
+- is_a() is a function which checks if the object is of this class or has this class as on of its parents.
+
+```
+<?php
+class A {}
+class B extends A {}
+class C {}
+
+$variable = new B();
+
+print $variable instanceof B; // TRUE
+print $variable instanceof A; // TRUE
+print $variable instanceof C; // FALSE
+
+print get_class($variable) == B::class; // TRUE
+print get_class($variable) == A::class; // FALSE
+print get_class($variable) == C::class; // FALSE
+
+print is_a($variable, B::class, FALSE); // TRUE
+print is_a($variable, A::class, FALSE); // TRUE
+print is_a($variable, C::class, FALSE); // FALSE
+```
+
+## What is the goto statement useful for?
+
+The goto statement can be used to jump to another section in the program. The target point is specified by a label followed by a colon, and the instruction is given as goto followed by the desired target label. This is not a full unrestricted goto, the target must be within the same file and context, meaning that you cannot jump out of a function or method, nor can you jump int one. You also cannot jump int any sort of loop or switch structure.
+
