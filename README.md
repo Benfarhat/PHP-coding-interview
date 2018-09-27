@@ -1190,3 +1190,38 @@ $_ENV is an associative array of variables sent to the current PHP script via th
 
 $_COOKIE is an associative array of variables sent to the current PHP script using the HTTP Cookies.
 
+## What is the difference between the "BITWISE AND" operator and the "LOGICAL AND" operator?
+
+A Bitwise AND operator is represened as `&` and evaluates bits ans a logical AND operator is represented as `&&` or the keyword `AND` and evaluates boolean values
+
+$a & $b : Bits that are set in both $a and $b are set
+ ---------     ---------  -- ---------
+ result        value      op test
+ ---------     ---------  -- ---------
+ Bitwise AND
+( 0 = 0000) = ( 0 = 0000) & ( 5 = 0101)
+( 1 = 0001) = ( 1 = 0001) & ( 5 = 0101)
+( 0 = 0000) = ( 2 = 0010) & ( 5 = 0101)
+( 4 = 0100) = ( 4 = 0100) & ( 5 = 0101)
+( 0 = 0000) = ( 8 = 1000) & ( 5 = 0101)
+
+
+$a && $b : returns TRUE if both $a and $b are TRUE, otherwise it returns FALSE. "&&" is supposed to work on boolean values, a zero is considered as false and non-zero as true. The "&&" operator does not evaluate second perator if first operand becomes false.
+
+## What are the two man string operators?
+
+- The concatenation operator `.`, which returns the concatenation of its right and left arguments
+- The append operator `.`, which returns the append the argument on the right to the argument on the left
+
+## What does the array operator "===" means?
+
+It's a strict comparison operator wich mean "identical" (and not only equal). It returns true if $a and $b have the same key/value pairs in the same order and the same types (It is different than "==" operator wich only check that $a and $b have the same key/value pair)
+
+## What is the differences between $a != $b and $a !== $b?
+
+- != means inequality, it is a poor comparison which simply mean that $a is not equal to $b (after type juggling)
+- !== mean non-identity, it a strict comparison which mean that $a is not equal to $a or have not the same type than $b. For example
+
+1 != "1" // Are they different after type juggling ??? return FALSE
+
+1 !== "1" // Are their value or type different ??? return TRUE
