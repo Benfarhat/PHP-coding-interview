@@ -1335,3 +1335,61 @@ echo urlencode("What's In Your Head?"); // What%27s+In+Your+Head%3F
 ## What is the difference between characters \034 and \x34?
 
 `\xhh` is the character with hexadecimal code `hh`, and `\ddd` is a character with octal code `ddd`
+
+## How can we pass the variable through the navigation between the pages
+
+It is possible to pass the variables between pages using:
+
+- Sessions
+- Cookies
+- Form fields
+- Query string
+
+## Is it possible to extend the execution time of a PHP script?
+
+The set_time_limit(X) added at the beginning of a script sets to X secondes the time of executio. It is also possible to specify this by setting the max_execution_time directive's value in the php.ini file. By default, limit is 30 secondes, to extend the execution time we just have to choose a X greater than 30.
+
+## Is it possible to destroy a cookie?
+
+Yes, we should assure that the expiration date is in the past, to trigger the removal mechanisme of the browser.
+
+## What is the default session time in PHP?
+
+The default session time is 1440 seconds and is defined in php.ini with the help of the directive session.gc_maxlifetime
+
+## Is it possible to use COM component in PHP?
+
+Yes it is possible to integrate Component Object Model components (COM) in PHP by enabling the php_com_dotnet.dll extension. We should also installing support for the various COM objects that we intend to use (such as MS Word).
+
+An example of use:
+
+```
+
+<?php
+// starting word
+$word = new COM("word.application") or die("Unable to instantiate Word");
+echo "Loaded Word, version {$word->Version}\n";
+
+//bring it to front
+$word->Visible = 1;
+
+//open an empty document
+$word->Documents->Add();
+
+//do some weird stuff
+$word->Selection->TypeText("This is a test...");
+$word->Documents[1]->SaveAs("Useless test.doc");
+
+//closing word
+$word->Quit();
+
+//free the object
+$word = null;
+```
+
+## Explain how you can update Memcached when you make changes to PHP?
+
+When PHP changes you can update Memcached by:
+
+- Clearing the Cache proactively: Clearing the cache when an insert or update is made
+- Resetting the Cache: It is similar to the first method but rather than just deleting the keys and wainting for the next request for the data to refresh the cache, reset the values after the insert or update.
